@@ -2,4 +2,8 @@
     <string name="af_app_name">Appartamento Facile</string>
     <string name="af_hint_username">Username</string>
     <string name="af_hint_password">Password</string>
+    <string name="shr_button_next">next</string>
+    <string name="shr_button_cancel">cancel</string>
+    <string name="shr_error_password">Password must contain at least 8 characters.</string>
+    <string name="af_filter_title">Filter</string>
 </resources>
