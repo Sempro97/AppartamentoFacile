@@ -14,8 +14,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appartamentofacile/LoginFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appartamentofacile/LoginFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/af_login_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/af_login_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appartamentofacile/ProductGridFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appartamentofacile/ProductGridFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/af_product_grid_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/af_product_grid_fragment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,18 +58,26 @@
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-07-05T12:35:21.245Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\sempr\Documents\UNIBO\Mobile\AppartamentoFacile\app\src\main\res\drawable-v24" />
-    </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.example.appartamentofacile" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.appartamentofacile" />
+      <recent name="com.example.appartamentofacile.application" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\sempr\Documents\UNIBO\Mobile\AppartamentoFacile\app\src\main\res" />
+      <recent name="C:\Users\sempr\Documents\UNIBO\Mobile\AppartamentoFacile\app\src\main\java\com\example\appartamentofacile" />
+      <recent name="C:\Users\sempr\Documents\UNIBO\Mobile\AppartamentoFacile\app\src\main\res\values" />
+      <recent name="C:\Users\sempr\Documents\UNIBO\Mobile\AppartamentoFacile\app\src\main\res\layout" />
+      <recent name="C:\Users\sempr\Documents\UNIBO\Mobile\AppartamentoFacile\app\src\main\res\drawable-v24" />
     </key>
   </component>
   <component name="RunDashboard">

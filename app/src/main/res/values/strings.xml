@@ -6,4 +6,6 @@
     <string name="shr_button_cancel">cancel</string>
     <string name="shr_error_password">Password must contain at least 8 characters.</string>
     <string name="af_filter_title">Filter</string>
+    <string name="af_product_title">Title</string>
+    <string name="af_product_description">Description</string>
 </resources>
