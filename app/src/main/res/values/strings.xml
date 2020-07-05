@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">AppartamentoFacile</string>
+    <string name="af_app_name">Appartamento Facile</string>
+    <string name="af_hint_username">Username</string>
+    <string name="af_hint_password">Password</string>
 </resources>
