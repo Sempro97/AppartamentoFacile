@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appartamentofacile.network.ProductEntry;
 
-public class ProductGridFragment extends Fragment {
+public class ApartamentGridFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

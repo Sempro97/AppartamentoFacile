@@ -31,10 +31,13 @@ public class ImageRequester {
                 new ImageLoader(
                         requestQueue,
                         new ImageLoader.ImageCache() {
+
                             private final LruCache<String, Bitmap> lruCache =
                                     new LruCache<String, Bitmap>(maxByteSize) {
                                         @Override
                                         protected int sizeOf(String url, Bitmap bitmap) {
+                                            // The cache size will be measured in kilobytes rather than
+                                            // number of items.
                                             return bitmap.getByteCount();
                                         }
                                     };
@@ -52,7 +55,7 @@ public class ImageRequester {
     }
 
     /**
-     * Get a static instance of ImageRequester
+     * Get a static instance of ImageRequester, Singleton
      */
     public static ImageRequester getInstance() {
         if (instance == null) {
@@ -71,9 +74,11 @@ public class ImageRequester {
         networkImageView.setImageUrl(url, imageLoader);
     }
 
+    // this is the maximum sum of the sizes of the entries in LruCache
+    // (If height maybe out of memory,if low problem of responsive)
     private int calculateMaxByteSize() {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        final int screenBytes = displayMetrics.widthPixels * displayMetrics.heightPixels * 4;
-        return screenBytes * 3;
+        final int screenBytes = displayMetrics.widthPixels * displayMetrics.heightPixels;
+        return screenBytes;
     }
 }
