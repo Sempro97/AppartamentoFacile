@@ -75,7 +75,8 @@ public class ImageRequester {
     }
 
     // this is the maximum sum of the sizes of the entries in LruCache
-    // (If height maybe out of memory,if low problem of responsive)
+    // (If height maybe out of memory,if low problem of responsive
+    // )
     private int calculateMaxByteSize() {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         final int screenBytes = displayMetrics.widthPixels * displayMetrics.heightPixels;

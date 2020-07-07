@@ -1,62 +1,51 @@
 package com.example.appartamentofacile;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class LoginFragment extends Fragment {
+public class RegisterFragment extends Fragment {
 
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.af_login_fragment, container, false);
+        View view = inflater.inflate(R.layout.af_register_fragment, container, false);
         final TextInputLayout passwordTextInput = view.findViewById(R.id.password_text_input);
         final TextInputEditText passwordEditText = view.findViewById(R.id.password_edit_text);
+        final TextInputLayout passwordRepeatTextInput = view.findViewById(R.id.password_repeat_text_input);
+        final TextInputEditText passwordRepeatEditText = view.findViewById(R.id.password_repeat_edit_text);
         MaterialButton nextButton = view.findViewById(R.id.next_button);
-        MaterialButton registerButton = view.findViewById(R.id.register_button);
 
-        // Set an error if the password is less than 8 characters.
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!isPasswordValid(passwordEditText.getText())) {
+                    //Not secure password
                     passwordTextInput.setError(getString(R.string.shr_error_password));
-                } else {
+                }else if(!(passwordEditText.getText().toString().equals(passwordRepeatEditText.getText().toString()))){
+                    //Check same password failed
+                    passwordRepeatTextInput.setError(getString(R.string.af_error_password_notEqual));
+                }else{
+                    //Ok new account created
                     passwordTextInput.setError(null); // Clear the error
-                    ((NavigationHost) getActivity()).navigateTo(new ApartamentGridFragment(), false); // Navigate to the next Fragment
+                    passwordRepeatTextInput.setError(null); // Clear the error
+                    getActivity().getSupportFragmentManager().popBackStack();
                 }
             }
         });
-
-        // Start new fragment.
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.container, new RegisterFragment());
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-        });
-
-
 
         // Clear the error once more than 8 characters are typed.
         passwordEditText.setOnKeyListener(new View.OnKeyListener() {
@@ -69,11 +58,8 @@ public class LoginFragment extends Fragment {
             }
         });
 
-
         return view;
     }
-
-
 
     /*
         In reality, this will have more complex logic including, but not limited to, actual
