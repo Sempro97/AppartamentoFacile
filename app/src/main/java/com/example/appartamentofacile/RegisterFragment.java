@@ -11,12 +11,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class RegisterFragment extends Fragment {
+
+    private UserViewModel userViewModel;
 
     @Override
     public View onCreateView(
@@ -30,6 +33,7 @@ public class RegisterFragment extends Fragment {
         final TextInputEditText usernameEditText = view.findViewById(R.id.username_edit_text);
         MaterialButton nextButton = view.findViewById(R.id.next_button);
         MaterialButton cancelButton = view.findViewById(R.id.cancel_button);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +48,7 @@ public class RegisterFragment extends Fragment {
                     //Ok new account created
                     passwordTextInput.setError(null); // Clear the error
                     passwordRepeatTextInput.setError(null); // Clear the error
+                    userViewModel.addUser(new User(usernameEditText.getText().toString(),passwordEditText.getText().toString()));
                     getActivity().getSupportFragmentManager().popBackStack();
                 }
             }
@@ -70,8 +75,7 @@ public class RegisterFragment extends Fragment {
     }
 
     /*
-        In reality, this will have more complex logic including, but not limited to, actual
-        authentication of the username and password.
+        Low security check
     */
     private boolean isPasswordValid(@Nullable Editable text) {
         return text != null && text.length() >= 8;

@@ -1,15 +1,12 @@
 package com.example.appartamentofacile;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +20,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginFragment extends Fragment {
 
-    private SharedViewModel<String> registerOutput;
+    private UserViewModel userViewModel;
+
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,7 +41,14 @@ public class LoginFragment extends Fragment {
                     passwordTextInput.setError(getString(R.string.shr_error_password));
                 } else {
                     passwordTextInput.setError(null); // Clear the error
-                    ((NavigationHost) getActivity()).navigateTo(new ApartamentGridFragment(), false); // Navigate to the next Fragment
+                    if(isUsernameStored(usernameEditText.getText().toString(), passwordEditText.getText().toString())){
+                        ((NavigationHost) getActivity()).navigateTo(new ApartamentGridFragment(), false); // Navigate to the next Fragment
+                    }
+                    else{
+                        passwordTextInput.setError(getString(R.string.af_));
+                    }
+
+
                 }
             }
         });
@@ -78,13 +83,33 @@ public class LoginFragment extends Fragment {
         });
 
 
+
+
         return view;
+    }
+
+    private boolean isUsernameStored(String username,String password) {
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        if(userViewModel.getUser(username) != null) {
+            User user = userViewModel.getUser(username);
+            if (password.hashCode() == user.getPassword()) {
+                return true;
+            }
+            //pasword not equal
+            Log.e("LogIn","Password Wrong!");
+            return false;
+        }
+        else{
+            Log.e("LogIn","Username not found!");
+            //username is null, not found
+            return false;
+        }
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        registerOutput=new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
     }
 
     /*
