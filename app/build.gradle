@@ -4,6 +4,11 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
     defaultConfig {
         applicationId "com.example.appartamentofacile"
         minSdkVersion 21
@@ -25,9 +30,7 @@ android {
 }
 
 dependencies {
-    def room_version= "2.2.5"
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor"androidx.room:room-compiler:$room_version"
+
     api 'com.google.android.material:material:1.1.0-alpha06'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.android.volley:volley:1.1.1'
@@ -38,4 +41,18 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test:runner:1.2.0-alpha05'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha05'
+    // Room components
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    annotationProcessor "androidx.room:room-compiler:$rootProject.roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+
+// Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
+
+// UI
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+
+// Testing
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
 }

@@ -27,7 +27,9 @@ public class RegisterFragment extends Fragment {
         final TextInputEditText passwordEditText = view.findViewById(R.id.password_edit_text);
         final TextInputLayout passwordRepeatTextInput = view.findViewById(R.id.password_repeat_text_input);
         final TextInputEditText passwordRepeatEditText = view.findViewById(R.id.password_repeat_edit_text);
+        final TextInputEditText usernameEditText = view.findViewById(R.id.username_edit_text);
         MaterialButton nextButton = view.findViewById(R.id.next_button);
+        MaterialButton cancelButton = view.findViewById(R.id.cancel_button);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +58,12 @@ public class RegisterFragment extends Fragment {
                 }
                 return false;
             }
+        });
+
+        cancelButton.setOnClickListener(v -> {
+            passwordEditText.getText().clear();
+            usernameEditText.getText().clear();
+            passwordRepeatEditText.getText().clear();
         });
 
         return view;

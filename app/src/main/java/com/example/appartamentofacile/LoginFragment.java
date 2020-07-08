@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -22,6 +23,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginFragment extends Fragment {
 
+    private SharedViewModel<String> registerOutput;
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,9 +31,10 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.af_login_fragment, container, false);
         final TextInputLayout passwordTextInput = view.findViewById(R.id.password_text_input);
         final TextInputEditText passwordEditText = view.findViewById(R.id.password_edit_text);
+        final TextInputEditText usernameEditText = view.findViewById(R.id.username_edit_text);
         MaterialButton nextButton = view.findViewById(R.id.next_button);
         MaterialButton registerButton = view.findViewById(R.id.register_button);
-
+        MaterialButton cancelButton = view.findViewById(R.id.cancel_button);
         // Set an error if the password is less than 8 characters.
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +59,11 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        cancelButton.setOnClickListener(v -> {
+            passwordEditText.getText().clear();
+            usernameEditText.getText().clear();
+        });
+
 
 
         // Clear the error once more than 8 characters are typed.
@@ -73,12 +81,16 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        registerOutput=new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+    }
 
     /*
-        In reality, this will have more complex logic including, but not limited to, actual
-        authentication of the username and password.
-    */
+            In reality, this will have more complex logic including, but not limited to, actual
+            authentication of the username and password.
+        */
     private boolean isPasswordValid(@Nullable Editable text) {
         return text != null && text.length() >= 8;
     }
