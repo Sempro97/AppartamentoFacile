@@ -1,4 +1,4 @@
-package com.example.appartamentofacile;
+package com.example.appartamentofacile.RecyclerView;
 
 import android.view.View;
 import android.widget.TextView;
@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.toolbox.NetworkImageView;
+import com.example.appartamentofacile.R;
 
 public class ApartamentCardViewHolder extends RecyclerView.ViewHolder {
 

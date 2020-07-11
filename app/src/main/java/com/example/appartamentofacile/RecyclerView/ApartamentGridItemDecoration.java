@@ -1,9 +1,11 @@
-package com.example.appartamentofacile;
+package com.example.appartamentofacile.RecyclerView;
 
 import android.graphics.Rect;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.appartamentofacile.RecyclerView.ApartamentGridFragment;
 
 /**
  * Custom item decoration for a vertical {@link ApartamentGridFragment} {@link RecyclerView}. Adds a

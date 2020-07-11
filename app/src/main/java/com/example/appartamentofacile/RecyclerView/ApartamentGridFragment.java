@@ -1,4 +1,4 @@
-package com.example.appartamentofacile;
+package com.example.appartamentofacile.RecyclerView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appartamentofacile.network.ProductEntry;
+import com.example.appartamentofacile.Network.ProductEntry;
+import com.example.appartamentofacile.R;
 
 public class ApartamentGridFragment extends Fragment {
 
@@ -29,7 +31,6 @@ public class ApartamentGridFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.af_product_grid_fragment, container, false);
-
         setUpToolbar(view);
 
 

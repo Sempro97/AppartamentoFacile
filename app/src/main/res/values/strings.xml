@@ -11,4 +11,9 @@
     <string name="repeat_password">Repeat password</string>
     <string name="af_hint_register">Create new account</string>
     <string name="af_error_password_notEqual">Password must be the same!</string>
+    <string name="af_error_password_wrong">The password is not correct!</string>
+    <string name="shr_button_register">Sign in</string>
+    <string name="af_account_label">My account</string>
+    <string name="af_dashboard_label">Dashboard</string>
+    <string name="shr_newapartment_label">Create new apartament</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.appartamentofacile.application;
+package com.example.appartamentofacile.Application;
 
 import android.app.Application;
 import android.content.Context;

@@ -1,6 +1,8 @@
 package com.example.appartamentofacile;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
@@ -11,11 +13,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.appartamentofacile.RecyclerView.ApartamentGridFragment;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import static com.example.appartamentofacile.MainActivity.PREFERENCE_FILE;
 
 public class RegisterFragment extends Fragment {
 
@@ -24,12 +30,14 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater,container,savedInstanceState);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.af_register_fragment, container, false);
         final TextInputLayout passwordTextInput = view.findViewById(R.id.password_text_input);
         final TextInputEditText passwordEditText = view.findViewById(R.id.password_edit_text);
         final TextInputLayout passwordRepeatTextInput = view.findViewById(R.id.password_repeat_text_input);
         final TextInputEditText passwordRepeatEditText = view.findViewById(R.id.password_repeat_edit_text);
+        final TextInputLayout usernameTextInput = view.findViewById(R.id.username_text_input);
         final TextInputEditText usernameEditText = view.findViewById(R.id.username_edit_text);
         MaterialButton nextButton = view.findViewById(R.id.next_button);
         MaterialButton cancelButton = view.findViewById(R.id.cancel_button);
@@ -45,11 +53,22 @@ public class RegisterFragment extends Fragment {
                     //Check same password failed
                     passwordRepeatTextInput.setError(getString(R.string.af_error_password_notEqual));
                 }else{
-                    //Ok new account created
+                    //Ok password correct
                     passwordTextInput.setError(null); // Clear the error
                     passwordRepeatTextInput.setError(null); // Clear the error
-                    userViewModel.addUser(new User(usernameEditText.getText().toString(),passwordEditText.getText().toString()));
-                    getActivity().getSupportFragmentManager().popBackStack();
+                    SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
+                    editor.putString(PREFERENCE_FILE,usernameEditText.getText().toString());
+                    editor.apply();
+                    //check if account is present
+                    if(userViewModel.getUser(usernameEditText.getText().toString()) == null) {
+                        userViewModel.addUser(new User(usernameEditText.getText().toString(),passwordEditText.getText().toString()));
+                        getActivity().getSupportFragmentManager().popBackStack();
+                    }else{
+                        usernameTextInput.setError("Username already exist!");
+                    }
+
+
+                    //((NavigationHost) getActivity()).navigateTo(getActivity().getSupportFragmentManager().getFragments().get(0), false); // Navigate to the next Fragment
                 }
             }
         });

@@ -1,5 +1,7 @@
 package com.example.appartamentofacile;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -14,13 +16,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.appartamentofacile.RecyclerView.ApartamentGridFragment;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import static com.example.appartamentofacile.MainActivity.PREFERENCE_FILE;
 
 public class LoginFragment extends Fragment {
 
     private UserViewModel userViewModel;
+    TextInputEditText usernameEditText;
 
     @Override
     public View onCreateView(
@@ -29,7 +34,7 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.af_login_fragment, container, false);
         final TextInputLayout passwordTextInput = view.findViewById(R.id.password_text_input);
         final TextInputEditText passwordEditText = view.findViewById(R.id.password_edit_text);
-        final TextInputEditText usernameEditText = view.findViewById(R.id.username_edit_text);
+        usernameEditText = view.findViewById(R.id.username_edit_text);
         MaterialButton nextButton = view.findViewById(R.id.next_button);
         MaterialButton registerButton = view.findViewById(R.id.register_button);
         MaterialButton cancelButton = view.findViewById(R.id.cancel_button);
@@ -42,35 +47,32 @@ public class LoginFragment extends Fragment {
                 } else {
                     passwordTextInput.setError(null); // Clear the error
                     if(isUsernameStored(usernameEditText.getText().toString(), passwordEditText.getText().toString())){
-                        ((NavigationHost) getActivity()).navigateTo(new ApartamentGridFragment(), false); // Navigate to the next Fragment
+                        ((NavigationHost) getActivity()).navigateTo(new ApartamentGridFragment(), true); // Navigate to the next Fragment
                     }
                     else{
-                        passwordTextInput.setError(getString(R.string.af_));
+                        passwordTextInput.setError(getString(R.string.af_error_password_wrong));
                     }
 
 
                 }
             }
         });
-
         // Start new fragment.
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                usernameEditText.setText("");
+                passwordTextInput.setError(null);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, new RegisterFragment());
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
-
         cancelButton.setOnClickListener(v -> {
             passwordEditText.getText().clear();
             usernameEditText.getText().clear();
         });
-
-
-
         // Clear the error once more than 8 characters are typed.
         passwordEditText.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -82,13 +84,19 @@ public class LoginFragment extends Fragment {
             }
         });
 
-
-
-
         return view;
     }
 
-    private boolean isUsernameStored(String username,String password) {
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(usernameEditText.getText().toString().isEmpty()) {
+            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+            usernameEditText.setText(sharedPref.getString(PREFERENCE_FILE, ""));
+        }
+    }
+
+    private boolean isUsernameStored(String username, String password) {
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         if(userViewModel.getUser(username) != null) {
             User user = userViewModel.getUser(username);
@@ -107,15 +115,10 @@ public class LoginFragment extends Fragment {
 
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
     /*
-            In reality, this will have more complex logic including, but not limited to, actual
-            authentication of the username and password.
-        */
+        In reality, this will have more complex logic including, but not limited to, actual
+        authentication of the username and password.
+    */
     private boolean isPasswordValid(@Nullable Editable text) {
         return text != null && text.length() >= 8;
     }

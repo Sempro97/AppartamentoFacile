@@ -1,4 +1,4 @@
-package com.example.appartamentofacile.network;
+package com.example.appartamentofacile.Network;
 
 import android.content.res.Resources;
 import android.net.Uri;

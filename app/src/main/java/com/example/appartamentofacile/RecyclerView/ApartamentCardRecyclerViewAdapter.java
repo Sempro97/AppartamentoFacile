@@ -1,4 +1,4 @@
-package com.example.appartamentofacile;
+package com.example.appartamentofacile.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +7,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appartamentofacile.network.ImageRequester;
-import com.example.appartamentofacile.network.ProductEntry;
+import com.example.appartamentofacile.Network.ImageRequester;
+import com.example.appartamentofacile.Network.ProductEntry;
+import com.example.appartamentofacile.R;
 
 import java.util.List;
 

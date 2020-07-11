@@ -11,8 +11,7 @@ import com.example.appartamentofacile.Database.UserRepository;
 import java.util.List;
 
 public class UserViewModel extends AndroidViewModel {
-    private UserRepository repository;
-
+     private UserRepository repository;
     private LiveData<List<User>> users;
 
     public UserViewModel(@NonNull Application application) {
