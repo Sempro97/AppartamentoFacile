@@ -2,6 +2,7 @@ package com.example.appartamentofacile;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,6 +14,7 @@ import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -24,6 +26,10 @@ import com.example.appartamentofacile.ViewModel.ListItemViewModel;
 import com.example.appartamentofacile.ViewModel.UserViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.appartamentofacile.MainActivity.USERNAME_FILE_lOG;
@@ -46,6 +52,8 @@ public class AddFragment extends Fragment {
     private TextInputEditText descriptionEditText;
     private TextInputEditText startDateEditText;
     private TextInputEditText endDateEditText;
+    Date start;
+    Date end;
 
     @Nullable
     @Override
@@ -58,6 +66,7 @@ public class AddFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        SimpleDateFormat sdformat = new SimpleDateFormat("dd/MM/yyyy");
 
         final Activity activity = getActivity();
         if (activity != null) {
@@ -74,6 +83,11 @@ public class AddFragment extends Fragment {
                     String inputDate = new String(date + "/" + month + "/" + year);
                     startDateEditText.setText(inputDate);
                     startDate=inputDate;
+                    try {
+                        start = sdformat.parse(inputDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 });
                 newFragment.show(((FragmentActivity) activity).getSupportFragmentManager(), "datePicker");
             });
@@ -83,6 +97,11 @@ public class AddFragment extends Fragment {
                     String inputDate = new String(date + "/" + month + "/" + year);
                     endDate = inputDate;
                     endDateEditText.setText(inputDate);
+                    try {
+                        end = sdformat.parse(inputDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 });
                 newFragment.show(((FragmentActivity) activity).getSupportFragmentManager(), "datePicker");
             });
@@ -93,18 +112,28 @@ public class AddFragment extends Fragment {
             activity.findViewById(R.id.fab_add).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(inputNotEmpty(descriptionEditText.getText())){
-                    //add item to the database using the viewmodel and room
-                    description = descriptionEditText.getText().toString();
-                    title = titleEditText.getText().toString();
-                        SharedPreferences sharedPref = getActivity().getSharedPreferences(USERNAME_FILE_lOG, Context.MODE_PRIVATE);
-                    addItemViewModel.addItem(new CardItem(startDate, endDate,title, description,
-                            userViewModel.getUser(sharedPref.getString(USERNAME_NAME_lOG, "")).getId()));
-                    Log.e("user:",sharedPref.getString(USERNAME_NAME_lOG, ""));
-                    activity.setResult(RESULT_OK);
-                    activity.finish();
-                    } else {
+                    if(!inputNotEmpty(descriptionEditText.getText())){
                         descriptionEditText.setError(getString(R.string.card_empty));
+                    }else if(!inputNotEmpty(startDateEditText.getText())){
+                        showDialogErrorDate();
+                    }else if(!inputNotEmpty(endDateEditText.getText())){
+                        showDialogErrorDate();
+                    }else if(!inputNotEmpty(titleEditText.getText())){
+                        titleEditText.setError(getString(R.string.card_empty));
+                    }else if(start.compareTo(end)>0){
+                        showDialogErrorDate();
+                    }else{
+                        //add item to the database using the viewmodel and room
+                        description = descriptionEditText.getText().toString();
+                        title = titleEditText.getText().toString();
+                        //insert id of user into the new card
+                        SharedPreferences sharedPref = getActivity().getSharedPreferences(USERNAME_FILE_lOG, Context.MODE_PRIVATE);
+                        addItemViewModel.addItem(new CardItem(startDate, endDate,title, description,
+                                userViewModel.getUser(sharedPref.getString(USERNAME_NAME_lOG, "")).getId()));
+                        //Debug user that made new card
+//                        Log.e("user:",sharedPref.getString(USERNAME_NAME_lOG, ""));
+                        activity.setResult(RESULT_OK);
+                        activity.finish();
                    }
 
                 }
@@ -116,5 +145,19 @@ public class AddFragment extends Fragment {
 
     private boolean inputNotEmpty(@Nullable Editable text) {
         return text != null && text.length() > 0;
+    }
+
+    private void showDialogErrorDate(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+        builder1.setMessage("The Date is not valid!");
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 }

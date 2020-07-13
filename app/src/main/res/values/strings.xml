@@ -27,4 +27,5 @@
     <string name="af_hint_enddate">End date:</string>
     <string name="af_hint_startdate">Start date:</string>
     <string name="search">search</string>
+    <string name="date_not_valid">Date is not valid!</string>
 </resources>
