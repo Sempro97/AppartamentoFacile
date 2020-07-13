@@ -104,7 +104,7 @@ public class ApartmentGridFragment extends Fragment {
         final FragmentActivity activity = getActivity();
         user = getUserLogged();
 
-        Utils.setUpToolbar((AppCompatActivity) activity, getString(R.string.af_app_name));
+        Utils.setUpToolbar((AppCompatActivity) activity, getString(R.string.af_app_name)+ ": " + user.getUsername());
         // Set up the RecyclerView
         recyclerView = activity.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
