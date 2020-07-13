@@ -24,4 +24,7 @@
     <string name="description">description:</string>
     <string name="card_empty">All text should be full!</string>
     <string name="af_description_fragment">Description:</string>
+    <string name="af_hint_enddate">End date:</string>
+    <string name="af_hint_startdate">Start date:</string>
+    <string name="search">search</string>
 </resources>

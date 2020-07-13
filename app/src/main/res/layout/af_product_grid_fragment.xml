@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ApartamentGridFragment">
+    tools:context=".ApartmentGridFragment">
 
     <include
         android:id="@+id/includeToolbar"
@@ -26,8 +26,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/includeToolbar"
             app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/af_apartament_card"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            tools:listitem="@layout/af_apartment_card"            />
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"

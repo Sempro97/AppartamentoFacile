@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,6 +17,8 @@ import androidx.annotation.Nullable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
@@ -34,7 +37,7 @@ import java.util.stream.Collectors;
 import static com.example.appartamentofacile.MainActivity.USERNAME_FILE_lOG;
 import static com.example.appartamentofacile.MainActivity.USERNAME_NAME_lOG;
 
-public class ApartamentGridFragment extends Fragment {
+public class ApartmentGridFragment extends Fragment {
 
     private static final String LOG = "Apartment-Fragment";
     private UserViewModel userViewModel;
@@ -46,7 +49,44 @@ public class ApartamentGridFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //show the Toolbar menu (the search icon in our case)
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.af_toolbar_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            /**
+             * Called when the user submits the query. This could be due to a key press on the keyboard
+             * or due to pressing a submit button.
+             * @param query the query text that is to be submitted
+             * @return true if the query has been handled by the listener, false to let the
+             * SearchView perform the default action.
+             */
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            /**
+             * Called when the query text is changed by the user.
+             * @param newText the new content of the query text field.
+             * @return false if the SearchView should perform the default action of showing any
+             * suggestions if available, true if the action was handled by the listener.
+             */
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+
+        });
     }
 
     @Override
@@ -64,12 +104,13 @@ public class ApartamentGridFragment extends Fragment {
         final FragmentActivity activity = getActivity();
         user = getUserLogged();
 
+        Utils.setUpToolbar((AppCompatActivity) activity, getString(R.string.af_app_name));
         // Set up the RecyclerView
         recyclerView = activity.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         adapter = new ApartmentCardRecyclerViewAdapter(activity);
         recyclerView.setAdapter(adapter);
-//        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
         itemViewModel = new ViewModelProvider(activity).get(ListItemViewModel.class);
         //when the list of the items changed, the adapter gets the new list.
         itemViewModel.getItems().observe(activity, new Observer<List<CardItem>>() {
@@ -91,12 +132,6 @@ public class ApartamentGridFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
-        menuInflater.inflate(R.menu.af_toolbar_menu, menu);
-        super.onCreateOptionsMenu(menu, menuInflater);
-    }
-
     private User getUserLogged() {
         SharedPreferences sharedPref = getActivity().getSharedPreferences(USERNAME_FILE_lOG, Context.MODE_PRIVATE);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
@@ -110,6 +145,7 @@ public class ApartamentGridFragment extends Fragment {
         Log.d(LOG, "updateList()");
         adapter.updateList();
     }
+
 }
 
 

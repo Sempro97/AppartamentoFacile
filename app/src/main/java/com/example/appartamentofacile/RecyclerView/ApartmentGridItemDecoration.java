@@ -5,10 +5,10 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appartamentofacile.ApartamentGridFragment;
+import com.example.appartamentofacile.ApartmentGridFragment;
 
 /**
- * Custom item decoration for a vertical {@link ApartamentGridFragment} {@link RecyclerView}. Adds a
+ * Custom item decoration for a vertical {@link ApartmentGridFragment} {@link RecyclerView}. Adds a
  * small amount of padding to the left of grid items, and a large amount of padding to the right.
  */
 public class ApartmentGridItemDecoration extends RecyclerView.ItemDecoration {

@@ -55,7 +55,7 @@ public class LoginFragment extends Fragment {
                         editor.putString(USERNAME_NAME_lOG,usernameEditText.getText().toString());
                         //apply to prevent memory leak
                         editor.apply();
-                        ((NavigationHost) getActivity()).navigateTo(new ApartamentGridFragment(), true,FRAGMENT_TAG); // Navigate to the next Fragment
+                        ((NavigationHost) getActivity()).navigateTo(new ApartmentGridFragment(), true,FRAGMENT_TAG); // Navigate to the next Fragment
                     }
                     else{
                         passwordTextInput.setError(getString(R.string.af_error_password_wrong));

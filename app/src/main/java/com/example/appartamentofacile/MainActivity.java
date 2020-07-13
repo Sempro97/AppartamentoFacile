@@ -13,8 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.appartamentofacile.ViewModel.UserViewModel;
 
-import static com.example.appartamentofacile.Utils.LOGGED_IN;
-
 public class MainActivity extends AppCompatActivity implements NavigationHost {
 
     private static final String TAG = "MainActivity - LAB";
@@ -33,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
             Utils.insertFragment(this, new LoginFragment(), TAG);
         }
         if (userViewModel.getUserLogged() != null) {
-            Utils.insertFragment(this, new ApartamentGridFragment(), FRAGMENT_TAG);
+            Utils.insertFragment(this, new ApartmentGridFragment(), FRAGMENT_TAG);
         }
     }
 
@@ -71,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         if (requestCode == Utils.ACTIVITY_ADD_TRIP && resultCode == RESULT_OK) {
             Log.d(TAG, "RESULT_OK");
             FragmentManager manager = getSupportFragmentManager();
-            ApartamentGridFragment apartamentGridFragment = (ApartamentGridFragment) manager.findFragmentByTag(FRAGMENT_TAG);
+            ApartmentGridFragment apartamentGridFragment = (ApartmentGridFragment) manager.findFragmentByTag(FRAGMENT_TAG);
             if (apartamentGridFragment != null) {
                 Log.d(TAG, "updateList()");
                 apartamentGridFragment.updateList();
