@@ -30,18 +30,25 @@ public class LoginFragment extends Fragment {
     private SharedPreferences sharedPref;
     private UserViewModel userViewModel;
     private TextInputEditText usernameEditText;
+    private TextInputLayout passwordTextInput;
+    private TextInputEditText passwordEditText;
+    MaterialButton nextButton;
+    MaterialButton registerButton;
+    MaterialButton cancelButton;
 
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.af_login_fragment, container, false);
-        final TextInputLayout passwordTextInput = view.findViewById(R.id.password_text_input);
-        final TextInputEditText passwordEditText = view.findViewById(R.id.password_edit_text);
+        passwordTextInput = view.findViewById(R.id.password_text_input);
+        passwordEditText = view.findViewById(R.id.password_edit_text);
         usernameEditText = view.findViewById(R.id.username_edit_text);
-        MaterialButton nextButton = view.findViewById(R.id.next_button);
-        MaterialButton registerButton = view.findViewById(R.id.register_button);
-        MaterialButton cancelButton = view.findViewById(R.id.cancel_button);
+        nextButton = view.findViewById(R.id.next_button);
+        registerButton = view.findViewById(R.id.register_button);
+        cancelButton = view.findViewById(R.id.cancel_button);
+
         // Set an error if the password is less than 8 characters.
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,10 +84,13 @@ public class LoginFragment extends Fragment {
                 transaction.commit();
             }
         });
+
+        //Deprecated
         cancelButton.setOnClickListener(v -> {
             passwordEditText.getText().clear();
             usernameEditText.getText().clear();
         });
+
         // Clear the error once more than 8 characters are typed.
         passwordEditText.setOnKeyListener(new View.OnKeyListener() {
             @Override

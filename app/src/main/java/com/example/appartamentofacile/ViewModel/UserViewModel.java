@@ -6,20 +6,20 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.appartamentofacile.Database.UserRepository;
+import com.example.appartamentofacile.Database.Repository;
 import com.example.appartamentofacile.User;
 
 import java.util.List;
 
 public class UserViewModel extends AndroidViewModel {
 
-    private UserRepository repository;
+    private Repository repository;
     private LiveData<List<User>> users;
     private User user;
 
     public UserViewModel(@NonNull Application application) {
         super(application);
-        repository = new UserRepository(application);
+        repository = new Repository(application);
         users = repository.getUsers();
     }
 

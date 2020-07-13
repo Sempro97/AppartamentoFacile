@@ -50,25 +50,21 @@ public class RegisterFragment extends Fragment {
                     //Not secure password
                     passwordTextInput.setError(getString(R.string.shr_error_password));
                 }else if(!(passwordEditText.getText().toString().equals(passwordRepeatEditText.getText().toString()))){
-                    //Check same password failed
+                    //Check integrity password failed
                     passwordRepeatTextInput.setError(getString(R.string.af_error_password_notEqual));
+                }else if(userViewModel.getUser(usernameEditText.getText().toString()) != null){//check if account is already present
+                    usernameTextInput.setError("Username already exist!");
                 }else{
                     //Ok password correct
                     passwordTextInput.setError(null); // Clear the error
                     passwordRepeatTextInput.setError(null); // Clear the error
+                    //Track that user log in successfully
                     SharedPreferences sharedPref = getActivity().getSharedPreferences(USERNAME_FILE_lOG,Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString(USERNAME_NAME_lOG,usernameEditText.getText().toString());
                     editor.apply();
-                    //check if account is present
-                    if(userViewModel.getUser(usernameEditText.getText().toString()) == null) {
-                        userViewModel.addUser(new User(usernameEditText.getText().toString(),passwordEditText.getText().toString()));
-                        getActivity().getSupportFragmentManager().popBackStack();
-                    }else{
-                        usernameTextInput.setError("Username already exist!");
-                    }
-
-
+                    userViewModel.addUser(new User(usernameEditText.getText().toString(),passwordEditText.getText().toString()));
+                    getActivity().getSupportFragmentManager().popBackStack();
                     //((NavigationHost) getActivity()).navigateTo(getActivity().getSupportFragmentManager().getFragments().get(0), false); // Navigate to the next Fragment
                 }
             }

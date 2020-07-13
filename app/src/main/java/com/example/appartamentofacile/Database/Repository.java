@@ -1,10 +1,8 @@
 package com.example.appartamentofacile.Database;
 
 import android.app.Application;
-import android.os.Build;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 
 import com.example.appartamentofacile.CardItem;
@@ -14,17 +12,16 @@ import com.example.appartamentofacile.UserWithCard;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
-import java.util.stream.Collectors;
 
-public class UserRepository {
+public class Repository {
     private UserDAO userDAO;
     private LiveData<List<User>> user;
     private CardItemDAO cardItemDAO;
     private LiveData<List<CardItem>> item_list;
     private LiveData<List<UserWithCard>> userWithCard;
 
-    public UserRepository(Application application) {
-        UserRoomDatabase db = UserRoomDatabase.getDatabase(application);
+    public Repository(Application application) {
+        RoomDatabase db = RoomDatabase.getDatabase(application);
         userDAO = db.userDAO();
         user = userDAO.getUser();
         cardItemDAO = db.cardItemDAO();
@@ -48,7 +45,7 @@ public class UserRepository {
     // You must call this on a non-UI thread or your app will throw an exception. Room ensures
     // that you're not doing any long running operations on the main thread, blocking the UI.
     public void addUser(final User user) {
-        UserRoomDatabase.databaseWriteExecutor.execute(new Runnable() {
+        RoomDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 userDAO.addUser(user);
@@ -59,7 +56,7 @@ public class UserRepository {
     // You must call this on a non-UI thread or your app will throw an exception. Room ensures
     // that you're not doing any long running operations on the main thread, blocking the UI.
     public void addCardItem(final CardItem CardItem) {
-        UserRoomDatabase.databaseWriteExecutor.execute(new Runnable() {
+        RoomDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 cardItemDAO.addCardItem(CardItem);
@@ -71,7 +68,7 @@ public class UserRepository {
         Future<User> future;
         User userSelected = null;
         try {
-            future = UserRoomDatabase.databaseWriteExecutor.submit(new Callable<User>() {
+            future = RoomDatabase.databaseWriteExecutor.submit(new Callable<User>() {
                 @Override
                 public User call() {
                     return userDAO.findByUsername(username);

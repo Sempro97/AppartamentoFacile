@@ -4,7 +4,6 @@ import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.Room;
-import androidx.room.RoomDatabase;
 
 import com.example.appartamentofacile.CardItem;
 import com.example.appartamentofacile.User;
@@ -13,12 +12,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {User.class, CardItem.class}, version = 1, exportSchema = false)
-abstract class UserRoomDatabase extends RoomDatabase {
+abstract class RoomDatabase extends androidx.room.RoomDatabase {
     abstract UserDAO userDAO();
     abstract CardItemDAO cardItemDAO();
 
     //Singleton instance
-    private static volatile UserRoomDatabase INSTANCE;
+    private static volatile RoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
 
     //ExecutorService with a fixed thread pool that you will use to run database operations
@@ -31,12 +30,12 @@ abstract class UserRoomDatabase extends RoomDatabase {
      * @param context the context of the Application
      * @return the singleton
      */
-    static UserRoomDatabase getDatabase(final Context context) {
+    static RoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (UserRoomDatabase.class) {
+            synchronized (RoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            UserRoomDatabase.class, "user_database")
+                            RoomDatabase.class, "user_database")
                             .build();
                 }
             }

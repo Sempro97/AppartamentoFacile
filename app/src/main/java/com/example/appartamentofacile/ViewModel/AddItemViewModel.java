@@ -6,15 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.example.appartamentofacile.CardItem;
-import com.example.appartamentofacile.Database.UserRepository;
+import com.example.appartamentofacile.Database.Repository;
 
 public class AddItemViewModel extends AndroidViewModel {
 
-    private UserRepository repository;
+    private Repository repository;
 
     public AddItemViewModel(@NonNull Application application) {
         super(application);
-        repository = new UserRepository(application);
+        repository = new Repository(application);
     }
 
     public void addItem(CardItem item){

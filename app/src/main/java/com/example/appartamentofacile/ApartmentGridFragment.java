@@ -56,8 +56,8 @@ public class ApartmentGridFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.af_toolbar_menu, menu);
 
+        inflater.inflate(R.menu.af_toolbar_menu, menu);
         MenuItem item = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -92,7 +92,6 @@ public class ApartmentGridFragment extends Fragment {
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.af_product_grid_fragment, container, false);
         return view;

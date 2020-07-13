@@ -14,7 +14,7 @@ import com.example.appartamentofacile.UserWithCard;
 import java.util.List;
 
 @Dao
-public interface UserDAO {
+interface UserDAO {
     // The selected on conflict strategy ignores a new person
     // if it's exactly the same as one already in the list.
     @Insert(onConflict = OnConflictStrategy.ABORT)
