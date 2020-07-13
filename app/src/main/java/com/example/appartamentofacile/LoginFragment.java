@@ -16,16 +16,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.appartamentofacile.RecyclerView.ApartamentGridFragment;
+import com.example.appartamentofacile.ViewModel.UserViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import static com.example.appartamentofacile.MainActivity.PREFERENCE_FILE;
+
+import static com.example.appartamentofacile.MainActivity.FRAGMENT_TAG;
+import static com.example.appartamentofacile.MainActivity.USERNAME_FILE_lOG;
+import static com.example.appartamentofacile.MainActivity.USERNAME_NAME_lOG;
 
 public class LoginFragment extends Fragment {
 
+    private SharedPreferences sharedPref;
     private UserViewModel userViewModel;
-    TextInputEditText usernameEditText;
+    private TextInputEditText usernameEditText;
 
     @Override
     public View onCreateView(
@@ -47,7 +51,11 @@ public class LoginFragment extends Fragment {
                 } else {
                     passwordTextInput.setError(null); // Clear the error
                     if(isUsernameStored(usernameEditText.getText().toString(), passwordEditText.getText().toString())){
-                        ((NavigationHost) getActivity()).navigateTo(new ApartamentGridFragment(), true); // Navigate to the next Fragment
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString(USERNAME_NAME_lOG,usernameEditText.getText().toString());
+                        //apply to prevent memory leak
+                        editor.apply();
+                        ((NavigationHost) getActivity()).navigateTo(new ApartamentGridFragment(), true,FRAGMENT_TAG); // Navigate to the next Fragment
                     }
                     else{
                         passwordTextInput.setError(getString(R.string.af_error_password_wrong));
@@ -91,8 +99,8 @@ public class LoginFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if(usernameEditText.getText().toString().isEmpty()) {
-            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-            usernameEditText.setText(sharedPref.getString(PREFERENCE_FILE, ""));
+            sharedPref = getActivity().getSharedPreferences(USERNAME_FILE_lOG,Context.MODE_PRIVATE);
+            usernameEditText.setText(sharedPref.getString(USERNAME_NAME_lOG, ""));
         }
     }
 

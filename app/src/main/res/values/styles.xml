@@ -21,6 +21,12 @@
         <item name="boxStrokeColor">@color/textInputOutlineColor</item>
     </style>
 
+    <style name="Widget.Shrine.TextInputLayoutAddFragment" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextAppearance">@style/TextAppearance.Shrine.TextInputLayout.HintText</item>
+        <item name="hintTextColor">@color/textColorPrimary</item>
+        <item name="boxStrokeColor">@color/textInputOutlineColor</item>
+    </style>
+
     <style name="Widget.Shrine.Backdrop" parent="">
         <item name="android:background">?attr/colorAccent</item>
     </style>

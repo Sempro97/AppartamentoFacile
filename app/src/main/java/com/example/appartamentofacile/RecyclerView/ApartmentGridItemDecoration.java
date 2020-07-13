@@ -5,17 +5,17 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appartamentofacile.RecyclerView.ApartamentGridFragment;
+import com.example.appartamentofacile.ApartamentGridFragment;
 
 /**
  * Custom item decoration for a vertical {@link ApartamentGridFragment} {@link RecyclerView}. Adds a
  * small amount of padding to the left of grid items, and a large amount of padding to the right.
  */
-public class ApartamentGridItemDecoration extends RecyclerView.ItemDecoration {
+public class ApartmentGridItemDecoration extends RecyclerView.ItemDecoration {
     private int largePadding;
     private int smallPadding;
 
-    public ApartamentGridItemDecoration(int largePadding, int smallPadding) {
+    public ApartmentGridItemDecoration(int largePadding, int smallPadding) {
         this.largePadding = largePadding;
         this.smallPadding = smallPadding;
     }

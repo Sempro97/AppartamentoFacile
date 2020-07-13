@@ -1,4 +1,4 @@
-package com.example.appartamentofacile;
+package com.example.appartamentofacile.ViewModel;
 
 import android.app.Application;
 
@@ -7,12 +7,15 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.appartamentofacile.Database.UserRepository;
+import com.example.appartamentofacile.User;
 
 import java.util.List;
 
 public class UserViewModel extends AndroidViewModel {
-     private UserRepository repository;
+
+    private UserRepository repository;
     private LiveData<List<User>> users;
+    private User user;
 
     public UserViewModel(@NonNull Application application) {
         super(application);
@@ -25,11 +28,17 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public User getUser(String username){
-        return repository.getUserbyUsername(username);
+        this.user = repository.getUserbyUsername(username);
+        return this.user;
+    }
+
+    public User getUserLogged(){
+        return user;
     }
 
 
-    void addUser(User user){
+    public void addUser(User user){
+        this.user = user;
         repository.addUser(user);
     }
 

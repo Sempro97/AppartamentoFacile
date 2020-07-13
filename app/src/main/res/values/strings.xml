@@ -16,4 +16,12 @@
     <string name="af_account_label">My account</string>
     <string name="af_dashboard_label">Dashboard</string>
     <string name="shr_newapartment_label">Create new apartament</string>
+    <string name="startDate">Start Date:</string>
+    <string name="endDate">End date:</string>
+    <string name="button_select">Select</string>
+    <string name="af_description_title_fragment">Title:</string>
+    <string name="title">Title:</string>
+    <string name="description">description:</string>
+    <string name="card_empty">All text should be full!</string>
+    <string name="af_description_fragment">Description:</string>
 </resources>

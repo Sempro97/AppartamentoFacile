@@ -10,7 +10,6 @@
         style="@style/Widget.Shrine.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="@string/af_app_name"
-        app:navigationIcon="@drawable/af_menu" />
+        app:title="@string/af_app_name" />
 
 </com.google.android.material.appbar.AppBarLayout>

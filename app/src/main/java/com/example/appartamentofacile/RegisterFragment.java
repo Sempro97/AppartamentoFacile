@@ -1,6 +1,5 @@
 package com.example.appartamentofacile;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,15 +12,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.appartamentofacile.RecyclerView.ApartamentGridFragment;
+import com.example.appartamentofacile.ViewModel.UserViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import static com.example.appartamentofacile.MainActivity.PREFERENCE_FILE;
+import static com.example.appartamentofacile.MainActivity.USERNAME_FILE_lOG;
+import static com.example.appartamentofacile.MainActivity.USERNAME_NAME_lOG;
+import static com.example.appartamentofacile.Utils.LOGGED_IN;
 
 public class RegisterFragment extends Fragment {
 
@@ -56,8 +56,9 @@ public class RegisterFragment extends Fragment {
                     //Ok password correct
                     passwordTextInput.setError(null); // Clear the error
                     passwordRepeatTextInput.setError(null); // Clear the error
-                    SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
-                    editor.putString(PREFERENCE_FILE,usernameEditText.getText().toString());
+                    SharedPreferences sharedPref = getActivity().getSharedPreferences(USERNAME_FILE_lOG,Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString(USERNAME_NAME_lOG,usernameEditText.getText().toString());
                     editor.apply();
                     //check if account is present
                     if(userViewModel.getUser(usernameEditText.getText().toString()) == null) {

@@ -6,14 +6,16 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.appartamentofacile.CardItem;
 import com.example.appartamentofacile.User;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, CardItem.class}, version = 1, exportSchema = false)
 abstract class UserRoomDatabase extends RoomDatabase {
     abstract UserDAO userDAO();
+    abstract CardItemDAO cardItemDAO();
 
     //Singleton instance
     private static volatile UserRoomDatabase INSTANCE;
