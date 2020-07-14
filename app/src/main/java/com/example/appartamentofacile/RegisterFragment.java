@@ -21,7 +21,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import static com.example.appartamentofacile.MainActivity.USERNAME_FILE_lOG;
 import static com.example.appartamentofacile.MainActivity.USERNAME_NAME_lOG;
-import static com.example.appartamentofacile.Utils.LOGGED_IN;
 
 public class RegisterFragment extends Fragment {
 
@@ -48,7 +47,7 @@ public class RegisterFragment extends Fragment {
             public void onClick(View view) {
                 if (!isPasswordValid(passwordEditText.getText())) {
                     //Not secure password
-                    passwordTextInput.setError(getString(R.string.shr_error_password));
+                    passwordTextInput.setError(getString(R.string.af_error_password));
                 }else if(!(passwordEditText.getText().toString().equals(passwordRepeatEditText.getText().toString()))){
                     //Check integrity password failed
                     passwordRepeatTextInput.setError(getString(R.string.af_error_password_notEqual));

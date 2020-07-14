@@ -80,7 +80,7 @@ public class AddFragment extends Fragment {
 
             startDateButton.setOnClickListener((v) -> {
                 DialogFragment newFragment = new DatePickerFragment((pickerView, year, month, date) -> {
-                    String inputDate = new String(date + "/" + month + "/" + year);
+                    String inputDate = new String(date + "/" + (month+1) + "/" + year);
                     startDateEditText.setText(inputDate);
                     startDate=inputDate;
                     try {
@@ -94,7 +94,7 @@ public class AddFragment extends Fragment {
 
             endDateButton.setOnClickListener((v) -> {
                 DialogFragment newFragment = new DatePickerFragment((pickerView, year, month, date) -> {
-                    String inputDate = new String(date + "/" + month + "/" + year);
+                    String inputDate = new String(date + "/" + (month+1) + "/" + year);
                     endDate = inputDate;
                     endDateEditText.setText(inputDate);
                     try {

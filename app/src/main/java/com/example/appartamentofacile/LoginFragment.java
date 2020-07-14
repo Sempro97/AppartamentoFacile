@@ -54,10 +54,11 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (!isPasswordValid(passwordEditText.getText())) {
-                    passwordTextInput.setError(getString(R.string.shr_error_password));
+                    passwordTextInput.setError(getString(R.string.af_error_password));
                 } else {
                     passwordTextInput.setError(null); // Clear the error
                     if(isUsernameStored(usernameEditText.getText().toString(), passwordEditText.getText().toString())){
+                        sharedPref = getActivity().getSharedPreferences(USERNAME_FILE_lOG,Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putString(USERNAME_NAME_lOG,usernameEditText.getText().toString());
                         //apply to prevent memory leak

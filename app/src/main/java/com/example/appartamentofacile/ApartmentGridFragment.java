@@ -3,6 +3,7 @@ package com.example.appartamentofacile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -109,7 +110,12 @@ public class ApartmentGridFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         adapter = new ApartmentCardRecyclerViewAdapter(activity);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ){
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
+        }else {
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
+        }
         itemViewModel = new ViewModelProvider(activity).get(ListItemViewModel.class);
         //when the list of the items changed, the adapter gets the new list.
         itemViewModel.getItems().observe(activity, new Observer<List<CardItem>>() {

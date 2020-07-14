@@ -7,7 +7,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/app_bar"
-        style="@style/Widget.Shrine.Toolbar"
+        style="@style/Widget.AF.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:title="@string/af_app_name" />

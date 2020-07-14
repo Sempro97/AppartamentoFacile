@@ -35,7 +35,7 @@
             android:textSize="16sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Shrine.TextInputLayout"
+            style="@style/Widget.AF.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
@@ -50,7 +50,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Shrine.TextInputLayout"
+            style="@style/Widget.AF.TextInputLayout"
             android:id="@+id/password_text_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="@string/shr_button_next" />
+                android:text="@string/af_button_next" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_button"
@@ -86,7 +86,7 @@
                 android:layout_toStartOf="@id/next_button"
                 android:layout_toLeftOf="@id/next_button"
                 android:visibility="invisible"
-                android:text="@string/shr_button_cancel" />
+                android:text="@string/af_button_cancel" />
         </RelativeLayout>
 
         <RelativeLayout

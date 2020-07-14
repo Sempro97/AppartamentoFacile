@@ -2,9 +2,9 @@
     <string name="af_app_name">Appartamento Facile</string>
     <string name="af_hint_username">Username</string>
     <string name="af_hint_password">Password</string>
-    <string name="shr_button_next">Log In</string>
-    <string name="shr_button_cancel">cancel</string>
-    <string name="shr_error_password">Password must contain at least 8 characters.</string>
+    <string name="af_button_next">Log In</string>
+    <string name="af_button_cancel">cancel</string>
+    <string name="af_error_password">Password must contain at least 8 characters.</string>
     <string name="af_filter_title">Filter</string>
     <string name="af_product_title">Title</string>
     <string name="af_product_description">Description</string>
@@ -12,20 +12,18 @@
     <string name="af_hint_register">Create new account</string>
     <string name="af_error_password_notEqual">Password must be the same!</string>
     <string name="af_error_password_wrong">The password is not correct!</string>
-    <string name="shr_button_register">Sign in</string>
+    <string name="af_button_register">Sign in</string>
     <string name="af_account_label">My account</string>
     <string name="af_dashboard_label">Dashboard</string>
-    <string name="shr_newapartment_label">Create new apartament</string>
     <string name="startDate">Start Date:</string>
     <string name="endDate">End date:</string>
     <string name="button_select">Select</string>
     <string name="af_description_title_fragment">Title:</string>
-    <string name="title">Title:</string>
     <string name="description">description:</string>
     <string name="card_empty">All text should be full!</string>
     <string name="af_description_fragment">Description:</string>
-    <string name="af_hint_enddate">End date:</string>
-    <string name="af_hint_startdate">Start date:</string>
+    <string name="af_hint_end_date">End date:</string>
+    <string name="af_hint_start_date">Start date:</string>
     <string name="search">search</string>
     <string name="date_not_valid">Date is not valid!</string>
 </resources>
